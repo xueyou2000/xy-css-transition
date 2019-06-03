@@ -122,6 +122,11 @@ function CSSTransition(props: CSSTransitionProps) {
         firstFlag.current = false;
     }, [visible]);
 
+    useEffect(() => {
+        // children更变重置firstFlag状态
+        firstFlag.current = true;
+    }, [children]);
+
     return React.cloneElement(children as any, { ref });
 }
 
