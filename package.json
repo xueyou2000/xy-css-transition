@@ -1,7 +1,7 @@
 {
     "name": "xy-css-transition",
     "version": "0.0.1",
-    "description": "基于 React Hooks 的按钮组件",
+    "description": "基于 React Hooks 的CSS过渡组件",
     "types": "es/index.d.ts",
     "main": "es/index.js",
     "module": "es/index.js",

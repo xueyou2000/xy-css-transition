@@ -1,7 +1,7 @@
 [
     {
         "name": "Simple",
-        "title": "简答例子",
-        "desc": "简答例子的一段描述。"
+        "title": "简单例子",
+        "desc": "最基础的使用，必须提供timeout过渡时间和visible进入还是离开属性。"
     }
 ]

@@ -10,7 +10,7 @@
 
 # xy-css-transition
 
-基于`React Hooks` + `typescript`的基础组件
+CSS 过渡组件, 包裹元素, 在其进入和离开时执行动画
 
 ## 安装
 
@@ -21,26 +21,30 @@ yarn add xy-css-transition
 
 ## 使用例子
 
-```ts
+```tsx
 import React from "react";
 import ReactDOM from "react-dom";
-import XyCssTransition from "xy-css-transition";
-ReactDOM.render(<XyCssTransition />, container);
+import CssTransition from "xy-css-transition";
+ReactDOM.render(
+    <CSSTransition timeout={500} visible={visible}>
+        <div className="block" />
+    </CSSTransition>,
+    container
+);
 ```
 
 ## API
 
-| 属性     | 说明                                                               | 类型           | 默认值    |
-| -------- | ------------------------------------------------------------------ | -------------- | --------- |
-| ghost    | 幽灵属性，使按钮背景透明                                           | boolean        | false     |
-| long     | 是否长按钮                                                         | boolean        | false     |
-| icon     | 设置按钮的图标类型                                                 | IconDefinition | -         |
-| loading  | 设置按钮载入状态                                                   | boolean        | `false`   |
-| disabled | 按钮失效状态                                                       | boolean        | `false`   |
-| shape    | 设置按钮形状，可选值为 `circle` 或者不设                           | string         | -         |
-| size     | 设置按钮大小，可选值为 `small` `large` 或者不设                    | string         | `default` |
-| type     | 设置按钮类型，可选值为 `primary` `dashed` `text` `danger` 或者不设 | string         | -         |
-| onClick  | `click` 事件的 handler                                             | function       | -         |
+| 属性             | 说明                                      | 类型     | 默认值       |
+| ---------------- | ----------------------------------------- | -------- | ------------ |
+| timeout          | 过渡时间，需要与 css 里的过渡时间保持一直 | number   | -            |
+| visible          | 显示动画/隐藏动画                         | boolean  | -            |
+| name             | 过渡 css 样式名称                         | string   | `transition` |
+| animateOnInit    | 第一次是否执行动画                        | boolean  | `false`      |
+| onAppear         | 进入过渡开始事件                          | Function | -            |
+| onAppearComplete | 进入过渡完毕事件                          | Function | -            |
+| onLeave          | 离开过渡开始事件                          | Function | -            |
+| onLeaveComplete  | 离开过渡完毕事件                          | Function | -            |
 
 ## 开发
 
