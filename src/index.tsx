@@ -21,6 +21,7 @@ function CSSTransition(props: CSSTransitionProps) {
         }
         ele.style.display = null;
         ele.classList.remove(appear, appearActive);
+        ele.classList.add(`${name}-appear-complete`);
         clearTimeHandle();
         if (onAppearComplete) {
             onAppearComplete();
@@ -33,6 +34,7 @@ function CSSTransition(props: CSSTransitionProps) {
             return;
         }
         ele.classList.remove(leave, leaveActive);
+        ele.classList.add(`${name}-leave-complete`);
         ele.style.display = "none";
         clearTimeHandle();
         if (onLeaveComplete) {
@@ -49,6 +51,7 @@ function CSSTransition(props: CSSTransitionProps) {
 
         if (animateOnInit && firstFlag.current) {
             ele.style.display = "none";
+            ele.style.animation = "none";
             ele.classList.add(appear);
             // Tips: 这一行至关重要, 确保了浏览器重绘
             // This is for to force a repaint,
@@ -61,6 +64,7 @@ function CSSTransition(props: CSSTransitionProps) {
         }
 
         requestAnimationFrame(() => {
+            ele.style.animation = null;
             ele.style.display = "block";
             // 离开动画还没结束就立刻移除结束样式
             if (ele.classList.contains(leaveActive)) {
@@ -86,6 +90,7 @@ function CSSTransition(props: CSSTransitionProps) {
 
         if (animateOnInit && firstFlag.current) {
             ele.style.display = "none";
+            ele.style.animation = "none";
             ele.classList.add(leave);
             // Tips: 这一行至关重要, 确保了浏览器重绘
             ele.clientHeight;
@@ -96,6 +101,7 @@ function CSSTransition(props: CSSTransitionProps) {
         }
 
         requestAnimationFrame(() => {
+            ele.style.animation = null;
             ele.style.display = null;
             // 进入动画还没结束就立刻移除结束样式
             if (ele.classList.contains(appearActive)) {
