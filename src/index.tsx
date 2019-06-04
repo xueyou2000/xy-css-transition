@@ -20,11 +20,11 @@ function CSSTransition(props: CSSTransitionProps) {
             return;
         }
         ele.style.display = null;
-        ele.classList.remove(appear, appearActive);
+        ele.classList.remove(appear, appearActive, `${name}-leave-complete`);
         ele.classList.add(`${name}-appear-complete`);
         clearTimeHandle();
         if (onAppearComplete) {
-            onAppearComplete();
+            onAppearComplete(ele);
         }
     }
 
@@ -33,12 +33,12 @@ function CSSTransition(props: CSSTransitionProps) {
         if (!ele) {
             return;
         }
-        ele.classList.remove(leave, leaveActive);
+        ele.classList.remove(leave, leaveActive, `${name}-appear-complete`);
         ele.classList.add(`${name}-leave-complete`);
         ele.style.display = "none";
         clearTimeHandle();
         if (onLeaveComplete) {
-            onLeaveComplete();
+            onLeaveComplete(ele);
         }
     }
 
@@ -60,7 +60,7 @@ function CSSTransition(props: CSSTransitionProps) {
         }
 
         if (onAppear) {
-            onAppear();
+            onAppear(ele);
         }
 
         if (animateOnInit && firstFlag.current) {
@@ -69,7 +69,7 @@ function CSSTransition(props: CSSTransitionProps) {
         ele.style.display = "block";
         // 离开动画还没结束就立刻移除结束样式
         if (ele.classList.contains(leaveActive)) {
-            ele.classList.remove(leaveActive, leave);
+            ele.classList.remove(leaveActive, leave, `${name}-leave-complete`);
         }
         ele.classList.add(appear);
 
@@ -97,7 +97,7 @@ function CSSTransition(props: CSSTransitionProps) {
         }
 
         if (onLeave) {
-            onLeave();
+            onLeave(ele);
         }
 
         if (animateOnInit && firstFlag.current) {
@@ -106,7 +106,7 @@ function CSSTransition(props: CSSTransitionProps) {
         ele.style.display = null;
         // 进入动画还没结束就立刻移除结束样式
         if (ele.classList.contains(appearActive)) {
-            ele.classList.remove(appearActive, appear);
+            ele.classList.remove(appearActive, appear, `${name}-appear-complete`);
         }
 
         ele.classList.add(leave);
