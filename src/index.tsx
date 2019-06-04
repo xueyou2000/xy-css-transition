@@ -63,21 +63,21 @@ function CSSTransition(props: CSSTransitionProps) {
             onAppear();
         }
 
-        requestAnimationFrame(() => {
+        if (animateOnInit && firstFlag.current) {
             ele.style.animation = null;
-            ele.style.display = "block";
-            // 离开动画还没结束就立刻移除结束样式
-            if (ele.classList.contains(leaveActive)) {
-                ele.classList.remove(leaveActive, leave);
-            }
-            ele.classList.add(appear);
+        }
+        ele.style.display = "block";
+        // 离开动画还没结束就立刻移除结束样式
+        if (ele.classList.contains(leaveActive)) {
+            ele.classList.remove(leaveActive, leave);
+        }
+        ele.classList.add(appear);
 
-            requestAnimationFrame(() => {
-                ele.classList.add(appearActive);
-                timeHandler.current = window.setTimeout(() => {
-                    transitionEnter();
-                }, timeout);
-            });
+        requestAnimationFrame(() => {
+            ele.classList.add(appearActive);
+            timeHandler.current = window.setTimeout(() => {
+                transitionEnter();
+            }, timeout);
         });
     }
 
@@ -100,21 +100,21 @@ function CSSTransition(props: CSSTransitionProps) {
             onLeave();
         }
 
-        requestAnimationFrame(() => {
+        if (animateOnInit && firstFlag.current) {
             ele.style.animation = null;
-            ele.style.display = null;
-            // 进入动画还没结束就立刻移除结束样式
-            if (ele.classList.contains(appearActive)) {
-                ele.classList.remove(appearActive, appear);
-            }
+        }
+        ele.style.display = null;
+        // 进入动画还没结束就立刻移除结束样式
+        if (ele.classList.contains(appearActive)) {
+            ele.classList.remove(appearActive, appear);
+        }
 
-            ele.classList.add(leave);
-            requestAnimationFrame(() => {
-                ele.classList.add(leaveActive);
-                timeHandler.current = window.setTimeout(() => {
-                    transitionLeave();
-                }, timeout);
-            });
+        ele.classList.add(leave);
+        requestAnimationFrame(() => {
+            ele.classList.add(leaveActive);
+            timeHandler.current = window.setTimeout(() => {
+                transitionLeave();
+            }, timeout);
         });
     }
 
@@ -133,7 +133,11 @@ function CSSTransition(props: CSSTransitionProps) {
         firstFlag.current = true;
     }, [children]);
 
-    return React.cloneElement(children as any, { ref });
+    if (children) {
+        return React.cloneElement(children as any, { ref });
+    } else {
+        return null;
+    }
 }
 
 export default React.memo(CSSTransition);
