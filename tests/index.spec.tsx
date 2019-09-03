@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "react-testing-library";
+import { render } from "@testing-library/react";
 import CSSTransition from "../src";
 
 describe("CSSTransition", () => {
@@ -17,7 +17,7 @@ describe("CSSTransition", () => {
         const wrapper = render(
             <CSSTransition timeout={500} visible={true}>
                 <p>Hello</p>
-            </CSSTransition>
+            </CSSTransition>,
         );
         jest.runOnlyPendingTimers();
         const p = wrapper.getByText("Hello");
@@ -34,13 +34,13 @@ describe("CSSTransition", () => {
         const wrapper = render(
             <CSSTransition timeout={500} visible={true}>
                 <p>Hello</p>
-            </CSSTransition>
+            </CSSTransition>,
         );
 
         wrapper.rerender(
             <CSSTransition timeout={500} visible={false} onLeave={onLeave} onLeaveComplete={onLeaveComplete}>
                 <p>Hello</p>
-            </CSSTransition>
+            </CSSTransition>,
         );
         const p = wrapper.getByText("Hello");
 
@@ -62,13 +62,13 @@ describe("CSSTransition", () => {
         const wrapper = render(
             <CSSTransition timeout={500} visible={false}>
                 <p>Hello</p>
-            </CSSTransition>
+            </CSSTransition>,
         );
 
         wrapper.rerender(
             <CSSTransition timeout={500} visible={true} onAppear={onAppear} onAppearComplete={onAppearComplete}>
                 <p>Hello</p>
-            </CSSTransition>
+            </CSSTransition>,
         );
         const p = wrapper.getByText("Hello");
 
@@ -89,7 +89,7 @@ describe("CSSTransition", () => {
         const wrapper = render(
             <CSSTransition timeout={500} visible={true} onAppear={onAppear} onAppearComplete={onAppearComplete} animateOnInit={true}>
                 <p>Hello</p>
-            </CSSTransition>
+            </CSSTransition>,
         );
         const p = wrapper.getByText("Hello");
 
