@@ -1,6 +1,6 @@
 {
     "name": "xy-css-transition",
-    "version": "0.0.3",
+    "version": "0.1.0",
     "description": "基于 React Hooks 的CSS过渡组件",
     "types": "es/index.d.ts",
     "main": "es/index.js",
@@ -42,11 +42,11 @@
         "@types/react": "16.9.2",
         "@types/react-dom": "16.9.0",
         "quick-react-scripts": "^1.2.2",
-        "xy-manual-tools": "^0.1.65"
+        "xy-manual-tools": "^0.3.0"
     },
     "dependencies": {
-        "react": "^16.9.0",
-        "react-dom": "^16.9.0"
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0"
     },
     "repository": {
         "type": "git",
